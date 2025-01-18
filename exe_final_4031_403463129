@@ -1,0 +1,110 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+// تابع بازگشتی برای پیدا کردن بیشترین نمره
+int FindMax(int scores[], int index, int size) { 
+    if (index == size - 1) {
+        return scores[index];
+    }
+    int CurrentMax = FindMax(scores, index + 1, size);
+    if (scores[index] > CurrentMax)
+        return scores[index];
+    else {
+        return CurrentMax;
+    }
+}
+
+// تابع بازگشتی برای پیدا کردن کمترین نمره
+int FindMin(int score[], int index, int size) { 
+    if (index == size - 1) {
+        return score[index];
+    }
+    int CurrentMin = FindMin(score, index + 1, size);
+    if (score[index] < CurrentMin)
+        return score[index];
+    else {
+        return CurrentMin;
+    }
+}
+
+int main() { 
+    int c, n;
+    int s[100]; // آرایه برای ذخیره نمرات
+    bool scoresEntered = false; // پرچم برای بررسی اینکه آیا نمرات وارد شده‌اند یا خیر
+
+    do {
+        cout << "\n Please choose an option " << endl << endl;
+        cout << " 1) Enter scores " << endl;
+        cout << " 2) Display scores " << endl;
+        cout << " 3) Display highest score " << endl;
+        cout << " 4) Display lowest score " << endl;
+        cout << " 5) Display average score " << endl;
+        cout << " 6) Display pass/fail " << endl;
+        cout << " 7) Exit " << endl;
+        cin >> c;
+        cout << "___" << endl;
+
+        // اگر نمرات وارد نشده باشند و گزینه‌ای به جز 1 انتخاب شود، از کاربر خواسته می‌شود نمرات را وارد کند
+        if (!scoresEntered && c != 1) {
+            cout << "Please enter scores first (Option 1)!" << endl;
+            continue; // به ابتدای حلقه برمی‌گردد تا از کاربر نمرات خواسته شود
+        }
+
+        switch (c) {
+            case 1: // گرفتن نمرات از کاربر
+                cout << "Enter the number of scores" << endl;
+                cin >> n;
+                cout << "Enter scores" << endl;
+                for (int i = 0; i < n; i++) { 
+                    cin >> s[i];
+                    if ((s[i] > 100) || (s[i] < 0)) { // چک کردن اینکه نمرات در بازه معتبر باشند
+                        cout << "Please enter a valid score" << endl;
+                        i--; // اگر نمره نامعتبر وارد شد، از کاربر دوباره درخواست نمره می‌شود
+                    }
+                }
+                scoresEntered = true;
+                break;
+
+            case 2: // نمایش نمرات
+                for (int i = 0; i < n; i++) {
+                    cout << s[i] << endl;
+                }
+                break;
+
+            case 3: // نمایش بیشترین نمره
+                cout << "The highest number is " << FindMax(s, 0, n) << endl;
+                break;
+
+            case 4: // نمایش کمترین نمره
+                cout << "The lowest number is " << FindMin(s, 0, n) << endl;
+                break;
+
+            case 5: { // محاسبه و نمایش میانگین نمرات
+                int sum = 0;
+                for (int i = 0; i < n; i++) {
+                    sum += s[i];
+                }
+                cout << "The average of scores is " << sum / n << endl;
+                break;
+            }
+
+            case 6: // نمایش قبولی/عدم قبولی
+                for (int i = 0; i < n; i++) {
+                    if (s[i] >= 50)
+                        cout << s[i] << " passed" << endl;
+                    else
+                        cout << s[i] << " failed" << endl;
+                }
+                break;
+
+            case 7:
+                cout << "Exiting program..." << endl;
+                exit(0);
+
+            default: // اگر گزینه غیرمعتبر وارد شد
+                cout << "Please enter a valid choice" << endl;
+        }
+
+    } while (c > 0 && c < 8); // حلقه ادامه پیدا می‌کند تا زمانی که کاربر گزینه‌ای معتبر وارد کند
+}
