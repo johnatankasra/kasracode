@@ -2,7 +2,6 @@
 #include <cstdlib>
 using namespace std;
 
-// تابع بازگشتی برای پیدا کردن بیشترین نمره
 int FindMax(int scores[], int index, int size) { 
     if (index == size - 1) {
         return scores[index];
@@ -15,7 +14,7 @@ int FindMax(int scores[], int index, int size) {
     }
 }
 
-// تابع بازگشتی برای پیدا کردن کمترین نمره
+
 int FindMin(int score[], int index, int size) { 
     if (index == size - 1) {
         return score[index];
@@ -30,8 +29,8 @@ int FindMin(int score[], int index, int size) {
 
 int main() { 
     int c, n;
-    int s[100]; // آرایه برای ذخیره نمرات
-    bool scoresEntered = false; // پرچم برای بررسی اینکه آیا نمرات وارد شده‌اند یا خیر
+    int s[100];
+    bool scoresEntered = false;
 
     do {
         cout << "\n Please choose an option " << endl << endl;
@@ -45,42 +44,42 @@ int main() {
         cin >> c;
         cout << "___" << endl;
 
-        // اگر نمرات وارد نشده باشند و گزینه‌ای به جز 1 انتخاب شود، از کاربر خواسته می‌شود نمرات را وارد کند
+        // 
         if (!scoresEntered && c != 1) {
             cout << "Please enter scores first (Option 1)!" << endl;
-            continue; // به ابتدای حلقه برمی‌گردد تا از کاربر نمرات خواسته شود
+            continue; 
         }
 
         switch (c) {
-            case 1: // گرفتن نمرات از کاربر
+            case 1: 
                 cout << "Enter the number of scores" << endl;
                 cin >> n;
                 cout << "Enter scores" << endl;
                 for (int i = 0; i < n; i++) { 
                     cin >> s[i];
-                    if ((s[i] > 100) || (s[i] < 0)) { // چک کردن اینکه نمرات در بازه معتبر باشند
+                    if ((s[i] > 100) || (s[i] < 0)) { 
                         cout << "Please enter a valid score" << endl;
-                        i--; // اگر نمره نامعتبر وارد شد، از کاربر دوباره درخواست نمره می‌شود
+                        i--; 
                     }
                 }
                 scoresEntered = true;
                 break;
 
-            case 2: // نمایش نمرات
+            case 2:
                 for (int i = 0; i < n; i++) {
                     cout << s[i] << endl;
                 }
                 break;
 
-            case 3: // نمایش بیشترین نمره
+            case 3:
                 cout << "The highest number is " << FindMax(s, 0, n) << endl;
                 break;
 
-            case 4: // نمایش کمترین نمره
+            case 4:
                 cout << "The lowest number is " << FindMin(s, 0, n) << endl;
                 break;
 
-            case 5: { // محاسبه و نمایش میانگین نمرات
+            case 5: {
                 int sum = 0;
                 for (int i = 0; i < n; i++) {
                     sum += s[i];
