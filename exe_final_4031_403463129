@@ -88,7 +88,7 @@ int main() {
                 break;
             }
 
-            case 6: // نمایش قبولی/عدم قبولی
+            case 6:
                 for (int i = 0; i < n; i++) {
                     if (s[i] >= 50)
                         cout << s[i] << " passed" << endl;
@@ -101,9 +101,9 @@ int main() {
                 cout << "Exiting program..." << endl;
                 exit(0);
 
-            default: // اگر گزینه غیرمعتبر وارد شد
+            default:
                 cout << "Please enter a valid choice" << endl;
         }
 
-    } while (c > 0 && c < 8); // حلقه ادامه پیدا می‌کند تا زمانی که کاربر گزینه‌ای معتبر وارد کند
+    } while (c > 0 && c < 8);
 }
